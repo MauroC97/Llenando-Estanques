@@ -36,32 +36,16 @@ public class Criadero {
 									// si da >0 ese es el valor que hay que escribir en el archivo
 	}
 	public int repartir_agua(){
-		int cant_tanques=1;//cantidad de tanques cargados
-		Estanque e=array.get(0);
-		int canio_ant=e.prof_canio;
-		double vol_may,vol_min;
+		int cant_tanques=1;
+		Estanque e = array.get(0);
+		if(vol_a_llenar<e.volumen_canio_sig())
+		{
+			e.volumen+=vol_a_llenar;
+			return cant_tanques;
+		}
+		e.volumen+=e.volumen_canio_sig();
+		vol_a_llenar-=e.volumen_canio_sig();
 		
-		if(vol_a_llenar < e.volumen_canio_sig()) {//no alcanzo a llenar el sig tanque hasta el caño.
-				e.volumen+=vol_a_llenar;
-				return cant_tanques;
-			}
-			e.volumen+=e.volumen_canio_sig();
-			vol_a_llenar-=e.volumen_canio_sig();
-			for(int i=1;i<array.size();i++)
-			{
-				cant_tanques++;
-				e=array.get(i);
-				vol_may=e.volumen_canio_ant(canio_ant)<e.volumen_canio_sig()?e.volumen_canio_sig():e.volumen_canio_ant(canio_ant);
-				vol_min=e.volumen_canio_ant(canio_ant)>e.volumen_canio_sig()?e.volumen_canio_sig():e.volumen_canio_ant(canio_ant);
-				if(vol_a_llenar < vol_min) {//no alcanzo a llenar el sig tanque hasta el caño.
-					e.volumen+=vol_a_llenar;
-					return cant_tanques;
-				}
-				e.volumen+=vol_min;
-				vol_a_llenar-=vol_min;
-				
-				
-			}
 	}
 	
 	public void procesar_salida() throws IOException {
@@ -72,9 +56,13 @@ public class Criadero {
 			pw.close();
 			return;
 		}
-		
-			
-		
+		int cant_tanques=this.repartir_agua();
+		pw.println(cant_tanques);
+		for(int i=0;i<cant_tanques;i++)
+		{
+			Estanque e = array.get(i);
+			pw.println(i+1+" "+e.volumen_en_metros());
+		}
 		pw.close();
 	}
 }
