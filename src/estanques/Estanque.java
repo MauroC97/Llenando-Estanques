@@ -4,11 +4,13 @@ public class Estanque {
 	int sup_base;
 	int prof_total;
 	int prof_canio;
+	int volumen;//los tanques comienzan vacios
 	
 	public Estanque(int sup_base, int prof_total, int prof_canio) {
 		this.sup_base = sup_base;
 		this.prof_total = prof_total;
 		this.prof_canio = prof_canio;
+		this.volumen=0;
 	}
 	
 	public int volumen_total() {
