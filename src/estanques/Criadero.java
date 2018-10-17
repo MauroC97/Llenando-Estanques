@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Criadero {
-	ArrayList<Estanque> array = new ArrayList<Estanque>();
-	int vol_a_llenar;
-	String path_entrada;
-	String path_salida;
+	private ArrayList<Estanque> array = new ArrayList<Estanque>();
+	private int vol_a_llenar;
+	private String path_entrada;
+	private String path_salida;
 	
 	public Criadero(String input,String output)
 	{
@@ -25,6 +25,13 @@ public class Criadero {
 		array.add(new Estanque(sc.nextInt(),sc.nextInt(),0));//ultimo estanque no tiene tubo(1 valor menos que leer)
 		vol_a_llenar=sc.nextInt();//ultimo valor del txt es la cantidad de agua que ingresa
 		sc.close();
+	}
+	public int hay_desborde() {
+		int acum=0;
+		for (Estanque e: array)
+			acum+= e.volumen_total();
+		return acum - vol_a_llenar;// retorna <=0 si no desborda o >0 si desborda
+								   // si da >0 ese es el valor que hay que escribir en el archivo
 	}
 	
 }
