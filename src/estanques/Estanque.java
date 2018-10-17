@@ -4,8 +4,7 @@ public class Estanque {
 	int sup_base;
 	int prof_total;
 	int prof_canio;//si prof canio = 0 es el ultimo tanque 
-	int volumen;//los tanques comienzan vacios
-	int prof_agua;
+	double volumen;//los tanques comienzan vacios
 	
 	public Estanque(int sup_base, int prof_total, int prof_canio) {
 		this.sup_base = sup_base;
@@ -14,14 +13,20 @@ public class Estanque {
 		this.volumen=0;
 	}
 	
-	public int volumen_total() {
+	public double volumen_total() {
 		return sup_base*prof_total;
 	}
-	public int volumen_canio() {
+	public double volumen_canio_ant(int prof) {
+		return this.volumen_total()-(sup_base*prof);
+	}
+	public double volumen_canio_sig() {
 		return this.volumen_total()-(sup_base*prof_canio);
 	}
+	public double diferencia_vol_entre_ant_sig(int prof_ant) {
+		return Math.abs(this.volumen_canio_ant(prof_ant)-this.volumen_canio_sig());
+	}
 	public int volumen_en_metros() {
-		return (int) (Math.round((double)(this.volumen*this.prof_total)/(double) this.volumen_total()));// regla de 3
+		return (int) (Math.round(this.volumen*this.prof_total)/this.volumen_total());// regla de 3
 	}
 	
 }
