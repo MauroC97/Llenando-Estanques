@@ -20,6 +20,8 @@ public class Estanque {
 	public int volumen_canio() {
 		return this.volumen_total()-(sup_base*prof_canio);
 	}
-	
+	public int volumen_en_metros() {
+		return (int) (Math.round((double)(this.volumen*this.prof_total)/(double) this.volumen_total()));// regla de 3
+	}
 	
 }
