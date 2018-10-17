@@ -22,6 +22,9 @@ public class Estanque {
 	public double volumen_canio_sig() {
 		return this.volumen_total()-(sup_base*prof_canio);
 	}
+	public double diferencia_vol_entre_ant_sig(int prof_ant) {
+		return Math.abs(this.volumen_canio_ant(prof_ant)-this.volumen_canio_sig());
+	}
 	public int volumen_en_metros() {
 		return (int) (Math.round(this.volumen*this.prof_total)/this.volumen_total());// regla de 3
 	}
