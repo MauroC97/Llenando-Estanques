@@ -35,7 +35,35 @@ public class Criadero {
 		return acum - vol_a_llenar;// retorna <=0 si no desborda o >0 si desborda
 									// si da >0 ese es el valor que hay que escribir en el archivo
 	}
-
+	public int repartir_agua(){
+		int cant_tanques=1;//cantidad de tanques cargados
+		Estanque e=array.get(0);
+		int canio_ant=e.prof_canio;
+		double vol_may,vol_min;
+		
+		if(vol_a_llenar < e.volumen_canio_sig()) {//no alcanzo a llenar el sig tanque hasta el caño.
+				e.volumen+=vol_a_llenar;
+				return cant_tanques;
+			}
+			e.volumen+=e.volumen_canio_sig();
+			vol_a_llenar-=e.volumen_canio_sig();
+			for(int i=1;i<array.size();i++)
+			{
+				cant_tanques++;
+				e=array.get(i);
+				vol_may=e.volumen_canio_ant(canio_ant)<e.volumen_canio_sig()?e.volumen_canio_sig():e.volumen_canio_ant(canio_ant);
+				vol_min=e.volumen_canio_ant(canio_ant)>e.volumen_canio_sig()?e.volumen_canio_sig():e.volumen_canio_ant(canio_ant);
+				if(vol_a_llenar < vol_min) {//no alcanzo a llenar el sig tanque hasta el caño.
+					e.volumen+=vol_a_llenar;
+					return cant_tanques;
+				}
+				e.volumen+=vol_min;
+				vol_a_llenar-=vol_min;
+				
+				
+			}
+	}
+	
 	public void procesar_salida() throws IOException {
 		PrintWriter pw = new PrintWriter(new FileWriter(path_salida));
 		int desborde = this.hay_desborde();
@@ -45,7 +73,7 @@ public class Criadero {
 			return;
 		}
 		
-		
+			
 		
 		pw.close();
 	}
