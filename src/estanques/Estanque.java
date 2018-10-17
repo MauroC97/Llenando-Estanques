@@ -3,7 +3,7 @@ package estanques;
 public class Estanque {
 	int sup_base;
 	int prof_total;
-	int prof_canio;
+	int prof_canio;//si prof canio = 0 es el ultimo tanque 
 	int volumen;//los tanques comienzan vacios
 	
 	public Estanque(int sup_base, int prof_total, int prof_canio) {
