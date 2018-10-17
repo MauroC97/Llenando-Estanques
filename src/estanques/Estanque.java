@@ -5,6 +5,7 @@ public class Estanque {
 	int prof_total;
 	int prof_canio;//si prof canio = 0 es el ultimo tanque 
 	int volumen;//los tanques comienzan vacios
+	int prof_agua;
 	
 	public Estanque(int sup_base, int prof_total, int prof_canio) {
 		this.sup_base = sup_base;

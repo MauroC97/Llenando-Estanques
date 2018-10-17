@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Criadero {
@@ -27,6 +28,8 @@ public class Criadero {
 		vol_a_llenar = sc.nextInt();// ultimo valor del txt es la cantidad de agua que ingresa
 		sc.close();
 	}
+
+
 
 	public int hay_desborde() {
 		int acum = 0;
